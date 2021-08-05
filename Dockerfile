@@ -1,6 +1,6 @@
 FROM python:3.7.4
 
-WORKDIR /usr/src/app
+WORKDIR /work
 
 RUN apt-get update -y && apt-get install -y mecab libmecab-dev mecab-ipadic mecab-ipadic-utf8 vim
 
