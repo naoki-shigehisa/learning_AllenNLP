@@ -8,7 +8,7 @@
     },
   },
   train_data_path: '../data/anotated_tsubame_discriptions_for_train.csv',
-  validation_data_path: '../data/anotated_tsubame_discriptions_for_train.csv',
+  validation_data_path: '../data/anotated_tsubame_discriptions_for_val.csv',
   model: {
     type: 'crf_tagger',
     text_field_embedder: {
