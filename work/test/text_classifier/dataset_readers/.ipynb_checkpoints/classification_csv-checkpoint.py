@@ -25,6 +25,7 @@ class ClassificationCsvReader(DatasetReader):
         if self.max_tokens:
             tokens = tokens[: self.max_tokens]
         text_field = TextField(tokens, self.token_indexers)
+        print(text_field)
         fields = {"text": text_field}
         if label:
             fields["labels"] = SequenceLabelField(label.split(" "), text_field, "labels")
