@@ -27,7 +27,7 @@
       dropout: 0.5,
       bidirectional: true,
     },
-    calculate_span_f1: true,
+    calculate_span_f1: false,
     dropout: 0.5,
     initializer: {},
   },

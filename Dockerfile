@@ -6,5 +6,5 @@ RUN apt-get update -y && apt-get install -y mecab libmecab-dev mecab-ipadic meca
 
 RUN pip install --upgrade pip
 
-RUN pip install matplotlib pandas numpy scipy jupyterlab tqdm gensim mecab-python3 sklearn torch torchvision gensim allennlp optuna allennlp-optuna
+RUN pip install matplotlib pandas numpy scipy jupyterlab tqdm gensim mecab-python3 sklearn torch torchvision gensim allennlp optuna allennlp-optuna allennlp-models
 
