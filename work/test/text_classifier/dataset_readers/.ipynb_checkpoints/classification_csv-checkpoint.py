@@ -1,7 +1,7 @@
 from typing import Dict, Iterable, List
 
 from allennlp.data import DatasetReader, Instance
-from allennlp.data.fields import LabelField, TextField
+from allennlp.data.fields import SequenceLabelField, TextField
 from allennlp.data.token_indexers import TokenIndexer, SingleIdTokenIndexer
 from allennlp.data.tokenizers import Token, Tokenizer, WhitespaceTokenizer
 
@@ -27,11 +27,11 @@ class ClassificationCsvReader(DatasetReader):
         text_field = TextField(tokens, self.token_indexers)
         fields = {"text": text_field}
         if label:
-            fields["label"] = LabelField(label)
+            fields["labels"] = SequenceLabelField(label.split(" "), text_field, "labels")
         return Instance(fields)
 
     def _read(self, file_path: str) -> Iterable[Instance]:
         with open(file_path, "r") as lines:
             for line in lines:
-                text, sentiment = line.strip().split("\t")
+                url, text, sentiment = line.split(",")
                 yield self.text_to_instance(text, sentiment)

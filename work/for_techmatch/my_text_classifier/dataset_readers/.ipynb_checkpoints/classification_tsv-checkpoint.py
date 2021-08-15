@@ -1,13 +1,13 @@
 from typing import Dict, Iterable, List
 
 from allennlp.data import DatasetReader, Instance
-from allennlp.data.fields import SequenceLabelField, TextField
+from allennlp.data.fields import LabelField, TextField
 from allennlp.data.token_indexers import TokenIndexer, SingleIdTokenIndexer
 from allennlp.data.tokenizers import Token, Tokenizer, WhitespaceTokenizer
 
 
-@DatasetReader.register("classification-csv")
-class ClassificationCsvReader(DatasetReader):
+@DatasetReader.register("classification-tsv")
+class ClassificationTsvReader(DatasetReader):
     def __init__(
         self,
         tokenizer: Tokenizer = None,
@@ -27,11 +27,11 @@ class ClassificationCsvReader(DatasetReader):
         text_field = TextField(tokens, self.token_indexers)
         fields = {"text": text_field}
         if label:
-            fields["labels"] = SequenceLabelField(label.split(" "), text_field, "labels")
+            fields["label"] = LabelField(label)
         return Instance(fields)
 
     def _read(self, file_path: str) -> Iterable[Instance]:
         with open(file_path, "r") as lines:
             for line in lines:
-                url, text, sentiment = line.split(",")
+                text, sentiment = line.strip().split("\t")
                 yield self.text_to_instance(text, sentiment)
