@@ -1,0 +1,1 @@
+from .crf_tagger_predictor import CrfTaggerPredictor

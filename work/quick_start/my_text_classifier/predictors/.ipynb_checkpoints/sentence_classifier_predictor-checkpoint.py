@@ -7,10 +7,10 @@ from overrides import overrides
 
 @Predictor.register("sentence_classifier")
 class SentenceClassifierPredictor(Predictor):
-    def predict(self, sentence: str) -> JsonDict:
-        return self.predict_json({"sentence": sentence})
+    def predict(self, tokens: str) -> JsonDict:
+        return self.predict_json({"tokens": tokens})
 
     @overrides
     def _json_to_instance(self, json_dict: JsonDict) -> Instance:
-        sentence = json_dict["sentence"]
-        return self._dataset_reader.text_to_instance(sentence)
+        tokens = json_dict["tokens"]
+        return self._dataset_reader.text_to_instance(tokens)
