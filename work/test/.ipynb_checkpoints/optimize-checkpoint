@@ -1,0 +1,20 @@
+#!/bin/bash
+
+export N_TRIALS=${N_TRIALS:-20}  # Optuna の試行回数を制御する
+export TIMEOUT=${TIMEOUT:-7200}  # # 一定時間が経過したら最適化を終了する（単位は秒）: 60*60*2 => 2h
+export TIMESTAMP=${TIMESTAMP:-`date '+%Y-%m-%d'`}
+
+export OPTUNA_STUDY_NAME=${OPTUNA_STUDY_NAME:-test-$TIMESTAMP}
+
+# ハイパーパラメータの最適化
+allennlp tune \
+  test.jsonnet \
+  hparam.json \
+  --serialization-dir result_hpo \
+  --include-package text_classifier \
+  --metrics best_validation_f1-measure-overall \
+  --study-name $OPTUNA_STUDY_NAME \
+  --direction maximize \
+  --n-trials $N_TRIALS \
+  --skip-if-exists \
+  --timeout $TIMEOUT

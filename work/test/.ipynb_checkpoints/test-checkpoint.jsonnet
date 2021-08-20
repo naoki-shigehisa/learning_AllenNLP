@@ -1,3 +1,9 @@
+// ハイパーパラメータを変数化する
+local lr = std.parseJson(std.extVar('lr'));
+local lstm_hidden_size = std.parseInt(std.extVar('lstm_hidden_size'));
+local dropout = std.parseJson(std.extVar('dropout'));
+local word_embedding_dim = std.parseInt(std.extVar('word_embedding_dim'));
+
 {
   dataset_reader: {
     type: 'classification-csv',
@@ -16,19 +22,19 @@
       token_embedders: {
         word: {
           type: 'embedding',
-          embedding_dim: 32,
+          embedding_dim: word_embedding_dim,
         },
       },
     },
     encoder: {
       type: 'lstm',
-      input_size: 32,
-      hidden_size: 32,
-      dropout: 0.5,
+      input_size: word_embedding_dim,
+      hidden_size: lstm_hidden_size,
+      dropout: dropout,
       bidirectional: true,
     },
     calculate_span_f1: false,
-    dropout: 0.5,
+    dropout: dropout,
     initializer: {},
   },
   data_loader: {
@@ -39,7 +45,7 @@
     cuda_device: -1,
     optimizer: {
       type: 'adam',
-      lr: 5e-4,
+      lr: lr,
     },
   },
 }

@@ -1,0 +1,35 @@
+[
+  {
+    "type": "float",
+    "attributes": {
+      "name": "dropout",
+      "low": 0.0,
+      "high": 0.8
+    }
+  },
+  {
+    "type": "int",
+    "attributes": {
+      "name": "lstm_hidden_size",
+      "low": 32,
+      "high": 256
+    }
+  },
+  {
+    "type": "float",
+    "attributes": {
+      "name": "lr",
+      "low": 5e-3,
+      "high": 5e-1,
+      "log": true
+    }
+  },
+  {
+    "type": "int",
+    "attributes": {
+      "name": "word_embedding_dim",
+      "low": 16,
+      "high": 128
+    }
+  }
+]
